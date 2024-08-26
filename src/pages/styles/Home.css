@@ -1,0 +1,17 @@
+/* body {
+  background: url("../../images/stars.svg"), #1b1b25;
+  height: 100vh;
+} */
+
+.hero {
+  background: url("../../images/stars.svg"), #1b1b25;
+  height: 98vh;
+}
+
+.hero-text {
+  color: #ffffff;
+}
+
+h1.hero-text {
+  letter-spacing: 0.2rem;
+}

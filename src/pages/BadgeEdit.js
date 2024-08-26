@@ -1,18 +1,18 @@
 import React from "react";
 
-import "./styles/BadgeNew.css";
+import "./styles/BadgeEdit.css";
 import header from "../images/platziconf-logo.svg";
 
 import Badge from "../components/Badge.js";
 import BadgeForm from "../components/BadgeForm";
 import api from "../api";
 
-class BadgeNew extends React.Component {
+class BadgeEdit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       form: {
-        loading: false,
+        loading: true,
         error: null,
         firstName: "",
         lastName: "",
@@ -35,9 +35,23 @@ class BadgeNew extends React.Component {
   handleSubmit = async e => {
     e.preventDefault();
     try {
-      await api.badges.create(this.state.form);
+      await api.badges.update(this.props.match.params.badgeId, this.state.form);
       this.setState({ loading: false });
       this.props.history.push("/badges");
+    } catch (err) {
+      this.setState({ loading: false, error: err });
+    }
+  };
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  fetchData = async () => {
+    this.setState({ loading: true, error: null });
+    try {
+      const data = await api.badges.read(this.props.match.params.badgeId);
+      this.setState({ loading: false, form: data });
     } catch (err) {
       this.setState({ loading: false, error: err });
     }
@@ -50,7 +64,7 @@ class BadgeNew extends React.Component {
 
     return (
       <React.Fragment>
-        <div className="BadgeNew__hero text-center">
+        <div className="BadgeEdit__hero text-center">
           <img src={header} alt="" className="img-fluid" />
         </div>
 
@@ -66,7 +80,7 @@ class BadgeNew extends React.Component {
               />
             </div>
             <div className="col-12 col-md-6">
-              <h1>New Attendant</h1>
+              <h1>Edit Attendant</h1>
               <BadgeForm
                 onSubmit={this.handleSubmit}
                 onChange={this.handleChange}
@@ -81,4 +95,4 @@ class BadgeNew extends React.Component {
   }
 }
 
-export default BadgeNew;
+export default BadgeEdit;
