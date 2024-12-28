@@ -1,22 +1,15 @@
-import React from 'react';
+import React from "react";
+import { throws } from "assert";
 
 class BadgeForm extends React.Component {
   handleClick = e => {
-    console.log('Button was clicked');
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
-    console.log('Form was submitted');
-    console.log(this.state);
+    console.log("Button was clicked");
   };
 
   render() {
     return (
       <div>
-        <h1>New Attendant</h1>
-
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.props.onSubmit}>
           <div className="form-group">
             <label>First Name</label>
             <input
@@ -24,10 +17,9 @@ class BadgeForm extends React.Component {
               className="form-control"
               type="text"
               name="firstName"
-              value={this.props.formValues.firstName}
+              value={this.props.formValue.firstName}
             />
           </div>
-
           <div className="form-group">
             <label>Last Name</label>
             <input
@@ -35,10 +27,9 @@ class BadgeForm extends React.Component {
               className="form-control"
               type="text"
               name="lastName"
-              value={this.props.formValues.lastName}
+              value={this.props.formValue.lastName}
             />
           </div>
-
           <div className="form-group">
             <label>Email</label>
             <input
@@ -46,35 +37,37 @@ class BadgeForm extends React.Component {
               className="form-control"
               type="email"
               name="email"
-              value={this.props.formValues.email}
+              value={this.props.formValue.email}
             />
           </div>
-
           <div className="form-group">
-            <label>Job Title</label>
+            <label>Job title</label>
             <input
               onChange={this.props.onChange}
               className="form-control"
               type="text"
               name="jobTitle"
-              value={this.props.formValues.jobTitle}
+              value={this.props.formValue.jobTitle}
             />
           </div>
-
           <div className="form-group">
-            <label>Twitter</label>
+            <label>Social</label>
             <input
               onChange={this.props.onChange}
               className="form-control"
               type="text"
-              name="twitter"
-              value={this.props.formValues.twitter}
+              name="social"
+              value={this.props.formValue.social}
             />
           </div>
 
           <button onClick={this.handleClick} className="btn btn-primary">
             Save
           </button>
+
+          {this.props.error && (
+            <p className="text-danger">{this.props.error.message}</p>
+          )}
         </form>
       </div>
     );

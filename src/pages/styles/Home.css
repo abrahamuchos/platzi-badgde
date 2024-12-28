@@ -1,24 +1,17 @@
-.Home {
-  width: 100%;
-  min-height: calc(100vh - 60px);
-  background: url('../../images/stars.svg'), #1B1B25;
-  background-repeat: repeat;
+/* body {
+  background: url("../../images/stars.svg"), #1b1b25;
+  height: 100vh;
+} */
 
+.hero {
+  background: url("../../images/stars.svg"), #1b1b25;
+  height: 98vh;
+}
+
+.hero-text {
   color: #ffffff;
-
-  display: flex;
-  align-items: center;
 }
 
-.Home__col {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-@media screen and (min-width: 768px) {
-  .Home__col {
-    align-items: flex-start;
-  }
+h1.hero-text {
+  letter-spacing: 0.2rem;
 }
